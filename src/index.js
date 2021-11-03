@@ -1,8 +1,9 @@
 import "./style.css";
 import newGame from "./newGame.js";
 import createBoardDOM from "./createBoardDOM";
-import Ship from "./factories/ship.js";
-import Gameboard from "./factories/gameboard.js";
+import playGame from "./playGame";
+//import Ship from "./factories/ship.js";
+//import Gameboard from "./factories/gameboard.js";
 import Player from "./factories/player.js";
 
 const gameboards = newGame();
@@ -17,4 +18,4 @@ const cpuGameboardDOM = document.querySelector(".cpu-gameboard");
 createBoardDOM(player, playerGameboard, playerGameboardDOM, false);
 createBoardDOM(cpu, cpuGameboard, cpuGameboardDOM, true);
 
-while (!cpuGameboard.allShipsSunk()) {}
+playGame(player, playerGameboard, cpu, cpuGameboard);

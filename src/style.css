@@ -7,13 +7,13 @@
   font-size: 40px;
 }
 
-.grid {
+[class*="grid-"] {
   width: 25px;
   height: 25px;
   border: 1pt solid rgba(0, 0, 0, 0.336);
 }
 
-.grid-row {
+.gridRow {
   display: flex;
   gap: 0;
 }
@@ -31,4 +31,12 @@
 .name {
   text-align: center;
   padding: 10px;
+}
+
+.missed {
+  background-color: red;
+}
+
+.ship-hit {
+  background-color: green;
 }

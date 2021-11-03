@@ -10,13 +10,13 @@ const player = (name) => {
 
   const makeRandomMove = () => {
     let coord = getRandom();
-    let timeout = 0;
-    while (!prevShots.includes(coord) && timeout <= 100) {
+    //let timeout = 0;
+    while (playerInfo.prevShots.includes(coord)) {
       coord = getRandom();
-      timeout++;
+      //timeout++;
     }
-    if (timeout == 100) return -1;
-    prevShots.push(coord);
+    //if (timeout == 1000) return -1;
+    playerInfo.prevShots.push(coord);
     return coord;
   };
 
