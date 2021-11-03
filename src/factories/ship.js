@@ -1,4 +1,4 @@
-const Ship = (type, length) => {
+const Ship = (type, length, isVertical) => {
   let hits = [];
 
   const hit = (position) => {
@@ -9,7 +9,7 @@ const Ship = (type, length) => {
   const isSunk = () => {
     return hits.length == length;
   };
-  return { type, length, hits, hit, isSunk };
+  return { type, length, hits, hit, isSunk, isVertical };
 };
 
 module.exports = Ship;

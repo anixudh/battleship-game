@@ -1,0 +1,34 @@
+.container {
+  font-family: monospace;
+}
+.header {
+  text-align: center;
+  padding: 10px;
+  font-size: 40px;
+}
+
+.grid {
+  width: 25px;
+  height: 25px;
+  border: 1pt solid rgba(0, 0, 0, 0.336);
+}
+
+.grid-row {
+  display: flex;
+  gap: 0;
+}
+
+.ship {
+  background-color: black;
+}
+
+.gameboards {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
+
+.name {
+  text-align: center;
+  padding: 10px;
+}
