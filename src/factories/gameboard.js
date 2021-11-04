@@ -20,7 +20,10 @@ const Gameboard = () => {
         boardInfo.board[startCoord + i]["ship"] = ship.type;
       }
     } else {
-      if (startCoord + ship.length - 1 >= Math.ceil(startCoord / 10) * 10)
+      if (
+        startCoord + ship.length - 1 >= Math.ceil(startCoord / 10) * 10 &&
+        startCoord % 10 != 0
+      )
         return;
       for (let i = 0; i < ship.length; i++) {
         boardInfo.board[startCoord + i]["ship"] = ship.type;

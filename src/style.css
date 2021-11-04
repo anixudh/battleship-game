@@ -40,3 +40,7 @@
 .ship-hit {
   background-color: green;
 }
+
+.hovered {
+  background-color: rgba(0, 0, 0, 0.158);
+}

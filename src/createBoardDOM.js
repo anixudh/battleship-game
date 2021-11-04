@@ -7,9 +7,6 @@ const createBoardDOM = (player, gameboard, gameboardDOM, hidden) => {
       grid.classList.add(`grid-${i * 10 + j}`);
       if (player.playerInfo.name == "cpu") grid.classList.add("cpu");
       else grid.classList.add("player");
-
-      if (gameboard.boardInfo.board[i * 10 + j]["ship"] != false && !hidden)
-        grid.classList.add("ship");
       gridRow.appendChild(grid);
     }
     gameboardDOM.appendChild(gridRow);

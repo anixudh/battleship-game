@@ -24,7 +24,6 @@ const playGame = (player, playerGameboard, cpu, cpuGameboard) => {
     else if (playerGameboard.allShipsSunk()) result.textContent = `CPU wins!`;
   };
   const cpuPlay = () => {
-    console.log("in cpu");
     playerGameboard.receiveAttack(cpu.makeRandomMove());
     checkMissed();
     checkHit();
@@ -37,7 +36,6 @@ const playGame = (player, playerGameboard, cpu, cpuGameboard) => {
     checkHit();
     checkWin();
     cpuPlay();
-    console.log("in player");
   };
   document.querySelectorAll(".cpu").forEach((cpuGrid) => {
     cpuGrid.addEventListener("click", attackCpu);

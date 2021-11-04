@@ -18,4 +18,6 @@ const cpuGameboardDOM = document.querySelector(".cpu-gameboard");
 createBoardDOM(player, playerGameboard, playerGameboardDOM, false);
 createBoardDOM(cpu, cpuGameboard, cpuGameboardDOM, true);
 
+gameboards.addListeners();
+gameboards.placeCPUShips();
 playGame(player, playerGameboard, cpu, cpuGameboard);
