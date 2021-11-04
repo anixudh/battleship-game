@@ -1,4 +1,4 @@
-const createBoardDOM = (player, gameboard, gameboardDOM, hidden) => {
+const createBoardDOM = (player, gameboard, gameboardDOM) => {
   for (let i = 0; i < 10; i++) {
     const gridRow = document.createElement("div");
     gridRow.classList.add("gridRow");

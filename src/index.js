@@ -9,9 +9,28 @@ import Player from "./factories/player.js";
 const gameboards = newGame();
 let playerGameboard = gameboards.playerGameboard;
 let cpuGameboard = gameboards.cpuGameboard;
+let player = Player("captain");
+let cpu = Player("cpu");
 
-const player = Player("ani");
-const cpu = Player("cpu");
+const nameForm = document.querySelector(".name-form");
+nameForm.textContent = "Enter player's name!";
+const nameInput = document.createElement("input");
+nameInput.classList.add("name-input");
+nameInput.type = "text";
+const nameSubmit = document.createElement("div");
+nameSubmit.textContent = "PLAY GAME!";
+nameSubmit.classList.add("name-submit");
+nameForm.appendChild(nameInput);
+nameForm.appendChild(nameSubmit);
+nameSubmit.addEventListener("click", () => {
+  if (nameInput.value != "") {
+    player.playerInfo.name = nameInput.value;
+    document.querySelector(".player-gameboard .name").textContent =
+      nameInput.value;
+    document.querySelector(".name-overlay").style.display = "none";
+  }
+});
+
 const playerGameboardDOM = document.querySelector(".player-gameboard");
 const cpuGameboardDOM = document.querySelector(".cpu-gameboard");
 
@@ -32,8 +51,8 @@ const resetGame = (e) => {
   const playerGameboardDOM = document.querySelector(".player-gameboard");
   const cpuGameboardDOM = document.querySelector(".cpu-gameboard");
 
-  createBoardDOM(player, playerGameboard, playerGameboardDOM, false);
-  createBoardDOM(cpu, cpuGameboard, cpuGameboardDOM, true);
+  createBoardDOM(player, playerGameboard, playerGameboardDOM);
+  createBoardDOM(cpu, cpuGameboard, cpuGameboardDOM);
 
   gameboards.addListeners();
   gameboards.placeCPUShips();
