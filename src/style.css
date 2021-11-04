@@ -182,3 +182,10 @@ a {
   border-radius: 20%;
   font-weight: bolder;
 }
+
+@media only screen and (max-width: 650px) {
+  .gameboards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
