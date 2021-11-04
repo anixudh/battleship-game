@@ -21,3 +21,22 @@ createBoardDOM(cpu, cpuGameboard, cpuGameboardDOM, true);
 gameboards.addListeners();
 gameboards.placeCPUShips();
 playGame(player, playerGameboard, cpu, cpuGameboard);
+
+const resetGame = (e) => {
+  document.querySelector(`.player-gameboard`).textContent = "";
+  document.querySelector(`.cpu-gameboard`).textContent = "";
+  document.querySelector(`.result`).textContent = "";
+  const gameboards = newGame();
+  let playerGameboard = gameboards.playerGameboard;
+  let cpuGameboard = gameboards.cpuGameboard;
+  const playerGameboardDOM = document.querySelector(".player-gameboard");
+  const cpuGameboardDOM = document.querySelector(".cpu-gameboard");
+
+  createBoardDOM(player, playerGameboard, playerGameboardDOM, false);
+  createBoardDOM(cpu, cpuGameboard, cpuGameboardDOM, true);
+
+  gameboards.addListeners();
+  gameboards.placeCPUShips();
+  playGame(player, playerGameboard, cpu, cpuGameboard);
+};
+document.querySelector(`.reset-game`).addEventListener("click", resetGame);

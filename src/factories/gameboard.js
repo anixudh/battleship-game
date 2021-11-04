@@ -16,7 +16,7 @@ const Gameboard = () => {
   const placeShip = (ship, startCoord) => {
     if (ship.isVertical) {
       //if (startCoord + (ship.length - 1) * 10 > 100) return;
-      console.log(startCoord);
+
       for (let i = 0; i < ship.length * 10; i += 10) {
         boardInfo.board[startCoord + i]["ship"] = ship.type;
       }

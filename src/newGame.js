@@ -5,24 +5,30 @@ const newGame = () => {
   let playerGameboard = Gameboard();
   let cpuGameboard = Gameboard();
 
+  document.querySelector(".cpu-gameboard").style.display = "none";
+  document.querySelector(".vertical-button").style.display = "block";
   let current = {
     name: "CR",
     length: 5,
     isVertical: false,
   };
-  //let isVertical = false;
+
   const displayShip = (length, coord) => {
     const hovered = document.querySelectorAll(".hovered");
     for (let i = 0; i < hovered.length; i++)
       hovered[i].classList.remove("hovered");
     if (current.isVertical) {
-      for (let i = coord; i < coord + length * 10; i++) {
+      if (coord + (length - 1) * 10 > 100) return;
+      for (let i = coord; i < coord + length * 10; i += 10) {
         let grid = document.querySelector(`.grid-${i}.player`);
+
         if (grid.classList.contains("ship")) {
           return;
         }
       }
     } else {
+      if (coord + length - 1 >= Math.ceil(coord / 10) * 10 && coord % 10 != 0)
+        return;
       for (let i = coord; i < coord + length; i++) {
         let grid = document.querySelector(`.grid-${i}.player`);
         if (grid.classList.contains("ship")) {
@@ -31,6 +37,10 @@ const newGame = () => {
       }
     }
     if (current.isVertical) {
+      for (let i = coord; i < coord + length * 10; i += 10) {
+        const hoveredGrid = document.querySelector(`.grid-${i}`);
+        hoveredGrid.classList.add("hovered");
+      }
     } else {
       if (coord + length - 1 >= Math.ceil(coord / 10) * 10 && coord % 10 != 0)
         return;
@@ -110,8 +120,16 @@ const newGame = () => {
         grid.classList.add("ship");
       }
     }
+
+    if (current.name == "NA") {
+      document.querySelector(".cpu-gameboard").style.display = "block";
+      document.querySelector(".vertical-button").style.display = "none";
+    }
   };
 
+  document.querySelector(".vertical-button").addEventListener("click", (e) => {
+    current.isVertical = !current.isVertical;
+  });
   const addListeners = () => {
     document.querySelectorAll(".player").forEach((grid) => {
       grid.addEventListener("mouseover", hoverShips);
@@ -180,6 +198,7 @@ const newGame = () => {
     coord = getSafeCoord(destroyer);
     cpuGameboard.placeShip(destroyer, coord);
 
+    /*
     for (let i = 0; i < 100; i++) {
       const grid = document.querySelector(`.grid-${i}.cpu`);
       console.log(grid);
@@ -187,6 +206,7 @@ const newGame = () => {
         grid.classList.add("ship");
       }
     }
+    */
   };
 
   return { playerGameboard, cpuGameboard, addListeners, placeCPUShips };
