@@ -19,9 +19,17 @@ const playGame = (player, playerGameboard, cpu, cpuGameboard) => {
   };
   const checkWin = () => {
     const result = document.querySelector(".result");
-    if (cpuGameboard.allShipsSunk())
+    if (cpuGameboard.allShipsSunk()) {
+      const reset = document.querySelector(".reset-game");
       result.textContent = `${player.playerInfo.name} wins!`;
-    else if (playerGameboard.allShipsSunk()) result.textContent = `CPU wins!`;
+      document.querySelector(".result-overlay").style.display = "flex";
+      document.querySelector(".result").appendChild(reset);
+    } else if (playerGameboard.allShipsSunk()) {
+      const reset = document.querySelector(".reset-game");
+      result.textContent = `CPU wins!`;
+      document.querySelector(".result-overlay").style.display = "flex";
+      document.querySelector(".result").appendChild(reset);
+    }
   };
   const cpuPlay = () => {
     playerGameboard.receiveAttack(cpu.makeRandomMove());

@@ -45,6 +45,7 @@ const resetGame = (e) => {
   document.querySelector(`.player-gameboard`).textContent = "";
   document.querySelector(`.cpu-gameboard`).textContent = "";
   document.querySelector(`.result`).textContent = "";
+  document.querySelector(".result-overlay").style.display = "none";
   const gameboards = newGame();
   let playerGameboard = gameboards.playerGameboard;
   let cpuGameboard = gameboards.cpuGameboard;
