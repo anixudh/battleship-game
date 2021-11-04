@@ -15,7 +15,21 @@ const newGame = () => {
     const hovered = document.querySelectorAll(".hovered");
     for (let i = 0; i < hovered.length; i++)
       hovered[i].classList.remove("hovered");
-
+    if (current.isVertical) {
+      for (let i = coord; i < coord + length * 10; i++) {
+        let grid = document.querySelector(`.grid-${i}.player`);
+        if (grid.classList.contains("ship")) {
+          return;
+        }
+      }
+    } else {
+      for (let i = coord; i < coord + length; i++) {
+        let grid = document.querySelector(`.grid-${i}.player`);
+        if (grid.classList.contains("ship")) {
+          return;
+        }
+      }
+    }
     if (current.isVertical) {
     } else {
       if (coord + length - 1 >= Math.ceil(coord / 10) * 10 && coord % 10 != 0)
@@ -47,6 +61,7 @@ const newGame = () => {
     }
   };
   const placeShips = (e) => {
+    if (!e.target.classList.contains("hovered")) return;
     const hovered = document.querySelectorAll(".hovered");
     for (let i = 0; i < hovered.length; i++)
       hovered[i].classList.remove("hovered");
@@ -104,18 +119,6 @@ const newGame = () => {
     });
   };
 
-  /*playerGameboard.placeShip(carrier, 4);
-  playerGameboard.placeShip(battleship, 21);
-  playerGameboard.placeShip(cruiser, 40);
-  playerGameboard.placeShip(submarine, 66);
-  playerGameboard.placeShip(destroyer, 83);*/
-  const allShipsPlaced = () => {
-    let count = 0;
-    for (let i = 0; i < 100; i++) {
-      if (cpuGameboard.boardInfo.board[i]["ship"] != false) count++;
-    }
-    return count == 17;
-  };
   const placeCPUShips = () => {
     let carrier = Ship("CR", 5, Math.random() < 0.5);
     let battleship = Ship("BS", 4, Math.random() < 0.5);
@@ -126,19 +129,56 @@ const newGame = () => {
     const getRandom = () => {
       return Math.floor(Math.random() * 100);
     };
-
-    while (!allShipsPlaced()) {
+    const isSingle = (ship, coord) => {
+      if (coord + ship.length * 10 > 100) return false;
+      if (
+        coord + ship.length - 1 >= Math.ceil(coord / 10) * 10 &&
+        coord % 10 != 0
+      )
+        return false;
+      if (ship.isVertical) {
+        for (let i = coord; i < coord + ship.length * 10; i++) {
+          let grid = document.querySelector(`.grid-${i}.cpu`);
+          if (grid.classList.contains("ship")) {
+            return false;
+          }
+        }
+      } else {
+        for (let i = coord; i < coord + ship.length; i++) {
+          let grid = document.querySelector(`.grid-${i}.cpu`);
+          if (grid.classList.contains("ship")) {
+            return false;
+          }
+        }
+      }
+      return true;
+    };
+    const getSafeCoord = (ship) => {
       let coord = getRandom();
-      cpuGameboard.placeShip(carrier, coord);
-      coord = getRandom();
-      cpuGameboard.placeShip(battleship, coord);
-      coord = getRandom();
-      cpuGameboard.placeShip(cruiser, coord);
-      coord = getRandom();
-      cpuGameboard.placeShip(submarine, coord);
-      coord = getRandom();
-      cpuGameboard.placeShip(destroyer, coord);
-    }
+      if (ship.isVertical) {
+        while (coord + ship.length * 10 > 100 && !isSingle(ship, coord))
+          coord = getRandom();
+      } else {
+        while (
+          coord + ship.length - 1 >= Math.ceil(coord / 10) * 10 &&
+          coord % 10 != 0 &&
+          !isSingle(ship, coord)
+        )
+          coord = getRandom();
+      }
+      return coord;
+    };
+
+    let coord = getSafeCoord(carrier);
+    cpuGameboard.placeShip(carrier, coord);
+    coord = getSafeCoord(battleship);
+    cpuGameboard.placeShip(battleship, coord);
+    coord = getSafeCoord(cruiser);
+    cpuGameboard.placeShip(cruiser, coord);
+    coord = getSafeCoord(submarine);
+    cpuGameboard.placeShip(submarine, coord);
+    coord = getSafeCoord(destroyer);
+    cpuGameboard.placeShip(destroyer, coord);
 
     for (let i = 0; i < 100; i++) {
       const grid = document.querySelector(`.grid-${i}.cpu`);
@@ -148,11 +188,6 @@ const newGame = () => {
       }
     }
   };
-  /*cpuGameboard.placeShip(carrier, 14);
-  cpuGameboard.placeShip(battleship, 64);
-  cpuGameboard.placeShip(cruiser, 21);
-  cpuGameboard.placeShip(submarine, 71);
-  cpuGameboard.placeShip(destroyer, 88);*/
 
   return { playerGameboard, cpuGameboard, addListeners, placeCPUShips };
 };
