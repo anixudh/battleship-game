@@ -5,6 +5,8 @@ const newGame = () => {
   let playerGameboard = Gameboard();
   let cpuGameboard = Gameboard();
 
+  const trans = document.querySelector(".transcript-text");
+  trans.textContent = "Place your Carrier...";
   document.querySelector(".cpu-gameboard").style.display = "none";
   document.querySelector(".vertical-button").style.display = "block";
   let current = {
@@ -82,34 +84,35 @@ const newGame = () => {
         let carrier = Ship("CR", 5, current.isVertical);
         playerGameboard.placeShip(carrier, coord);
         //console.log(playerGameboard.boardInfo.board);
-
+        trans.textContent = "Place your Battleship...";
         current.name = "BS";
 
         break;
       case "BS":
         let battleship = Ship("BS", 4, current.isVertical);
         playerGameboard.placeShip(battleship, coord);
-
+        trans.textContent = "Place your Cruiser...";
         current.name = "CS";
 
         break;
       case "CS":
         let cruiser = Ship("CS", 3, current.isVertical);
         playerGameboard.placeShip(cruiser, coord);
-
+        trans.textContent = "Place your Submarine...";
         current.name = "SUB";
 
         break;
       case "SUB":
         let submarine = Ship("SUB", 3, current.isVertical);
         playerGameboard.placeShip(submarine, coord);
-
+        trans.textContent = "Place your Destroyer...";
         current.name = "DS";
 
         break;
       case "DS":
         let destroyer = Ship("DS", 2, current.isVertical);
         playerGameboard.placeShip(destroyer, coord);
+        trans.textContent = " Make your first move by attacking the CPU!";
         current.name = "NA";
         break;
     }

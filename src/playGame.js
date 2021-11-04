@@ -38,6 +38,8 @@ const playGame = (player, playerGameboard, cpu, cpuGameboard) => {
     checkWin();
   };
   const attackCpu = (e) => {
+    document.querySelector(".transcript-text").textContent =
+      "FIRE YOUR SHOTS AND SINK ALL ENEMY SHIPS! green:hit red:miss";
     const coord = Number(e.target.className.substring(5, 7));
     cpuGameboard.receiveAttack(coord);
     checkMissed();

@@ -16,6 +16,7 @@ body {
 }
 hr {
   width: 99.5%;
+  margin: 0;
 }
 .header {
   text-align: center;
@@ -28,7 +29,7 @@ hr {
 [class*="grid-"] {
   width: 25px;
   height: 25px;
-  border: 1pt solid rgba(0, 0, 0, 0.301);
+  border: 1pt solid rgba(0, 0, 0, 0.123);
 }
 
 .gridRow {
@@ -37,13 +38,12 @@ hr {
 }
 
 .ship {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.63);
 }
 
 .gameboards {
   display: flex;
   justify-content: center;
-  padding-top: 20px;
 }
 
 .name {
@@ -52,11 +52,13 @@ hr {
 }
 
 .missed {
-  background-color: red;
+  border-radius: 50%;
+  background-color: rgba(160, 62, 62, 0.856);
 }
 
 .ship-hit {
-  background-color: green;
+  border-radius: 50%;
+  background-color: rgba(35, 92, 35, 0.918);
 }
 
 .hovered {
@@ -162,4 +164,21 @@ hr {
 a {
   text-decoration: none;
   color: white;
+}
+
+.transcript {
+  display: flex;
+  justify-content: center;
+}
+
+.transcript-text {
+  width: 300px;
+  height: 25px;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  background-color: green;
+  border: 3px solid orangered;
+  border-radius: 20%;
+  font-weight: bolder;
 }
